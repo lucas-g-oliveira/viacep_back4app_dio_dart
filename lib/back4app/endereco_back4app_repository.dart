@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:viacep_back4app_dio_dart/viacep/cep_model.dart';
 
 class EnderecosBack4App {
-  Dio _dio = Dio();
+  final Dio _dio = Dio();
 
   EnderecosBack4App() {
     String header1 = "X-Parse-REST-API-Key";
@@ -12,9 +12,9 @@ class EnderecosBack4App {
     String header3 = "application/json";
     String baseURL = "BASE-URL";
 
-    _dio.options.headers[header1] = dotenv.get(header1);
-    _dio.options.headers[header2] = dotenv.get(header2);
-    _dio.options.headers[header3] = dotenv.get(header3);
+    _dio.options.headers[header1] = dotenv.env[header1];
+    _dio.options.headers[header2] = dotenv.env[header2];
+    _dio.options.headers[header3] = dotenv.env[header3];
     _dio.options.baseUrl = dotenv.get(baseURL);
   }
 
@@ -44,8 +44,8 @@ class EnderecosBack4App {
     return response.statusCode == 201;
   }
 
-  Future<bool> update(Map<String, dynamic> param) async {
-    var response = await _dio.put("/", data: param);
+  Future<bool> update(Map<String, dynamic> params) async {
+    var response = await _dio.put("/", data: params);
     return response.statusCode == 201;
   }
 }

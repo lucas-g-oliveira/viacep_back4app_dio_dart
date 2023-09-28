@@ -1,21 +1,23 @@
-class EnderecoModel {
-  List<Results>? results;
+// ignore_for_file: unnecessary_this, unnecessary_new
 
-  EnderecoModel({this.results});
+class EnderecoModel {
+  List<Results> results = [];
+
+  EnderecoModel({required this.results});
 
   EnderecoModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        results.add(new Results.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (results != null) {
-      data['results'] = results!.map((v) => v.toJson()).toList();
+    if (this.results != [null]) {
+      data['results'] = this.results.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -26,10 +28,8 @@ class Results {
   String? cep;
   String? logradouro;
   String? bairro;
-  String? estado;
-  String? uF;
-  int? ddd;
-  String? cidade;
+  String? uf;
+  String? localidade;
   String? createdAt;
   String? updatedAt;
 
@@ -38,10 +38,8 @@ class Results {
       this.cep,
       this.logradouro,
       this.bairro,
-      this.estado,
-      this.uF,
-      this.ddd,
-      this.cidade,
+      this.uf,
+      this.localidade,
       this.createdAt,
       this.updatedAt});
 
@@ -50,26 +48,22 @@ class Results {
     cep = json['cep'];
     logradouro = json['logradouro'];
     bairro = json['bairro'];
-    estado = json['estado'];
-    uF = json['UF'];
-    ddd = json['ddd'];
-    cidade = json['cidade'];
+    uf = json['uf'];
+    localidade = json['localidade'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['objectId'] = objectId;
-    data['cep'] = cep;
-    data['logradouro'] = logradouro;
-    data['bairro'] = bairro;
-    data['estado'] = estado;
-    data['UF'] = uF;
-    data['ddd'] = ddd;
-    data['cidade'] = cidade;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['objectId'] = this.objectId;
+    data['cep'] = this.cep;
+    data['logradouro'] = this.logradouro;
+    data['bairro'] = this.bairro;
+    data['uf'] = this.uf;
+    data['localidade'] = this.localidade;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
     return data;
   }
 }
