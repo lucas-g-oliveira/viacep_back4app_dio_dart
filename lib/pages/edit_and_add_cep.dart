@@ -61,6 +61,7 @@ class _EditAndSaveScreenState extends State<EditAndSaveScreen> {
 
   Future<void> cepSearch(String cep) async {
     isLoading = true;
+    setState(() {});
     var busca = await _dio.get("https://viacep.com.br/ws/$cep/json/");
     asked = CEPModel.fromJson(busca.data);
 
@@ -75,11 +76,16 @@ class _EditAndSaveScreenState extends State<EditAndSaveScreen> {
   }
 
   cepOnChange(String value) {
-    bool exists = widget.allData!.map((e) => e.cep).toList().contains(value);
+    bool exists = widget.allData!
+        .map((e) => e.cep!.replaceAll("-", ""))
+        .toList()
+        .contains(value);
     if (value.length == 8 && isLoading == false && exists == false) {
       cepSearch(value);
     } else if (value.length == 8 && isLoading == false && exists == true) {
-      Results asked = widget.allData!.where((e) => e.cep == value).first;
+      Results asked = widget.allData!
+          .where((e) => e.cep!.replaceAll("-", "") == value)
+          .first;
       localidadeController.text = asked.localidade!;
       logradouroController.text = asked.logradouro!;
       bairroController.text = asked.bairro!;
@@ -138,9 +144,32 @@ class _EditAndSaveScreenState extends State<EditAndSaveScreen> {
           title:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text((!hasData) ? "Buscar" : "Editar"),
-            IconButton(
-              onPressed: () => action(),
-              icon: Icon(saveButton ? Icons.save : Icons.refresh),
+            isLoading
+                ? CircularProgressIndicator()
+                : SizedBox(
+                    height: 0,
+                  ),
+            Row(
+              children: [
+                hasData
+                    ? IconButton(
+                        onPressed: () async {
+                          await back4App.deleteById(widget.dataCEP!.objectId!);
+                          pop();
+                        },
+                        icon: Icon(Icons.delete))
+                    : SizedBox(
+                        width: 0,
+                      ),
+                saveButton
+                    ? IconButton(
+                        onPressed: () => action(),
+                        icon: Icon(Icons.save),
+                      )
+                    : SizedBox(
+                        width: 0,
+                      )
+              ],
             )
           ]),
         ),

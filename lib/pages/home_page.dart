@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text(
           'Salvador de CEPs',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
       ),
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Text(
             "+",
             style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
             textAlign: TextAlign.center,
           )),
     );

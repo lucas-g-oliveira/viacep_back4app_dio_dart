@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:viacep_back4app_dio_dart/back4app/endereco_back4app_model.dart';
-import 'package:viacep_back4app_dio_dart/back4app/endereco_back4app_repository.dart';
 import 'package:viacep_back4app_dio_dart/pages/edit_and_add_cep.dart';
 
 Widget cepTileList(BuildContext context, Results data, Function stateParent) {
   const List<String> keys = ["Logradouro", "Localidade", "Bairro", "UF", "CEP"];
-  EnderecosBack4App back4App = EnderecosBack4App();
 
   List<String> values = [
     data.logradouro!,
