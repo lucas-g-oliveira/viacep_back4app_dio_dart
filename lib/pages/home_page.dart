@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:viacep_back4app_dio_dart/back4app/endereco_back4app_model.dart';
 import 'package:viacep_back4app_dio_dart/back4app/endereco_back4app_repository.dart';
@@ -33,13 +35,23 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text(
-          'Salvador de CEPs',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-          textAlign: TextAlign.center,
-        ),
-      ),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Salvador de CEPs',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center,
+              ),
+              IconButton(
+                  onPressed: () async {
+                    carregarDados();
+                  },
+                  icon: Icon(Icons.refresh))
+            ],
+          )),
       body: Center(
           child: Container(
               child: loading
