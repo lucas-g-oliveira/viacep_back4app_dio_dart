@@ -8,11 +8,11 @@ class CEPModel {
   CEPModel({this.cep, this.logradouro, this.bairro, this.localidade, this.uf});
 
   CEPModel.fromJson(Map<String, dynamic> json) {
-    cep = json['cep'];
-    logradouro = json['logradouro'];
-    bairro = json['bairro'];
-    localidade = json['localidade'];
-    uf = json['uf'];
+    cep = json['cep'] ?? "";
+    logradouro = json['logradouro'] ?? "";
+    bairro = json['bairro'] ?? "";
+    localidade = json['localidade'] ?? "";
+    uf = json['uf'] ?? "";
   }
 
   Map<String, dynamic> toJson() {

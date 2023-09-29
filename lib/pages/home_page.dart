@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:viacep_back4app_dio_dart/back4app/endereco_back4app_model.dart';
 import 'package:viacep_back4app_dio_dart/back4app/endereco_back4app_repository.dart';
 import 'package:viacep_back4app_dio_dart/components/item_cep_tile.dart';
+import 'package:viacep_back4app_dio_dart/pages/edit_and_add_cep.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -45,10 +46,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? const CircularProgressIndicator()
                   : ListView.builder(
                       itemCount: temp!.results.length,
-                      itemBuilder: (context, index) =>
-                          cepTileList(context, temp!.results[index])))),
+                      itemBuilder: (context, index) => cepTileList(
+                          context, temp!.results[index], carregarDados)))),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => print("nwe"),
+          onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => EditAndSaveScreen(
+                              allData: temp!.results,
+                              parentSetState: carregarDados,
+                            )))
+              },
           child: const Text(
             "+",
             style: TextStyle(

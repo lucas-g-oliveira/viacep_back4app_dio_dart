@@ -44,8 +44,8 @@ class EnderecosBack4App {
     return response.statusCode == 201;
   }
 
-  Future<bool> update(Map<String, dynamic> params) async {
-    var response = await _dio.put("/", data: params);
+  Future<bool> update(String id, Map<String, dynamic> params) async {
+    var response = await _dio.put("/$id", data: params);
     return response.statusCode == 201;
   }
 }
